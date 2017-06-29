@@ -38,3 +38,10 @@ function get_pw() {
 
     return $res;
 }
+
+function showpw() {
+    $shpw = get_pw();
+    echo "<p id='shpw'>Generate&nbsp;Password:&nbsp;<strong>$shpw</strong></p>";
+}
+
+add_action('admin_notices', 'showpw');
