@@ -39,6 +39,13 @@ function get_pw() {
     return $res;
 }
 
+function stylePW() {
+    $lrrl = is_rtl() ? 'left' : 'right';
+    echo "<style>#shpw{float:$lrrl;padding-$lrrl:15px;padding-top:5px;margin:0;font-size:11px;}</style>";
+}
+
+add_action('admin_head', 'stylePW');
+
 function showpw() {
     $shpw = get_pw();
     echo "<p id='shpw'>Generate&nbsp;Password:&nbsp;<strong>$shpw</strong></p>";
