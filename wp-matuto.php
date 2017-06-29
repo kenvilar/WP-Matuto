@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Matuto
 Plugin URI: http://kenvilar.com/
-Description: A brief description of the Plugin.
+Description: A brief description of the WP Matuto (to be continued).
 Version:     0.0.1
 Author:      Ken Vilar
 Author URI:  http://kenvilar.com/
@@ -23,3 +23,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with WP Matuto. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
+
+function get_pw() {
+    $res = "";
+    $max_pw_length = 8;
+    $pw = "#b675hFJc$)wxTUyz+{[</?CDE89S";
+    $pw .= "-_=MN10A>BadmnoPGHIefg4tpWV]";
+    $pw .= "rsqK%^&*(klijQ23}RLOuv~!@XYZ";
+    $pwlen = strlen($pw);
+
+    for ($i = 0; $i < $max_pw_length; $i+=1) {
+        $res .= $pw[rand(0, $pwlen-1)];
+    }
+
+    return $res;
+}
