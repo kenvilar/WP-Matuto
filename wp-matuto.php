@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Matuto
 Plugin URI: http://kenvilar.com/
-Description: A brief description of the WP Matuto (to be continued).
+Description: WP Matuto is a plugin that generates password when adding a new user and display the generated pasword in the header of admin page.
 Version:     0.0.1
 Author:      Ken Vilar
 Author URI:  http://kenvilar.com/
@@ -26,14 +26,14 @@ along with WP Matuto. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 
 function get_pw() {
     $res = "";
-    $max_pw_length = 8;
+    $max_pw_length = 8; //Maximum length of pw characters
     $pw = "#b675hFJc$)wxTUyz+{[</?CDE89S";
     $pw .= "-_=MN10A>BadmnoPGHIefg4tpWV]";
     $pw .= "rsqK%^&*(klijQ23}RLOuv~!@XYZ";
     $pwlen = strlen($pw);
 
-    for ($i = 0; $i < $max_pw_length; $i+=1) {
-        $res .= $pw[rand(0, $pwlen-1)];
+    for ($i = 0; $i < $max_pw_length; $i += 1) {
+        $res .= $pw[rand(0, $pwlen - 1)];
     }
 
     return $res;
@@ -48,7 +48,7 @@ add_action('admin_head', 'stylePW');
 
 function showpw() {
     $shpw = get_pw();
-    echo "<p id='shpw'>Generate&nbsp;Password:&nbsp;<strong>$shpw</strong></p>";
+    echo "<p id='shpw'>Generated&nbsp;Password:&nbsp;<strong>$shpw</strong></p>";
 }
 
 add_action('admin_notices', 'showpw');
