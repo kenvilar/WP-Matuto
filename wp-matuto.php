@@ -52,3 +52,31 @@ function showpw() {
 }
 
 add_action('admin_notices', 'showpw');
+
+// Custom Taxonomy for Tutorial
+function wpmatuto_register_taxonomy_tutorial() {
+    $labels = [
+        'name'              => _x('Tutorials', 'taxonomy general name'),
+        'singular_name'     => _x('Tutorial', 'taxonomy singular name'),
+        'search_items'      => __('Search Tutorials'),
+        'all_items'         => __('All Tutorials'),
+        'parent_item'       => __('Parent Tutorial'),
+        'parent_item_colon' => __('Parent Tutorial:'),
+        'edit_item'         => __('Edit Tutorial'),
+        'update_item'       => __('Update Tutorial'),
+        'add_new_item'      => __('Add New Tutorial'),
+        'new_item_name'     => __('New Tutorial Name'),
+        'menu_name'         => __('Tutorial'),
+    ];
+    $args = [
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => ['slug' => 'tutorial'],
+    ];
+    register_taxonomy('tutorial', ['post'], $args);
+}
+
+add_action('init', 'wpmatuto_register_taxonomy_tutorial');
