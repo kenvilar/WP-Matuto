@@ -24,20 +24,28 @@ You should have received a copy of the GNU General Public License
 along with WP Matuto. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 
-function get_pw() {
-    $res = "";
-    $max_pw_length = 8; //Maximum length of pw characters
-    $pw = "#b675hFJc$)wxTUyz+{[</?CDE89S";
-    $pw .= "-_=MN10A>BadmnoPGHIefg4tpWV]";
-    $pw .= "rsqK%^&*(klijQ23}RLOuv~!@XYZ";
-    $pwlen = strlen($pw);
+/* This is the function where the password is generated */
+if(!function_exists('wpmatuto_generate_pw')):
+    function wpmatuto_generate_pw($special_char = true, $extra_special_chars = false ) {
+        $chars = 'dYZ012wx3enovyzpqKLMNrstuABCDfghijkIJlmEF67GHOPabcQRSTU89VWX45';
 
-    for ($i = 0; $i < $max_pw_length; $i += 1) {
-        $res .= $pw[rand(0, $pwlen - 1)];
+        if($special_char):
+            $chars .= '&*()$%^!@#';
+        endif;
+
+        if($extra_special_chars):
+            $chars .= '\'-_ []{}<>~`+=,.;:/?|';
+        endif;
+
+        $password_length = 12; // Length of the password
+        $pw = '';
+        for ( $i = 0; $i < $password_length; $i+=1 ) {
+            $pw .= substr($chars, wp_rand(0, strlen($chars) - 1), 1);
+        }
+
+        return apply_filters('random_password', $pw);
     }
-
-    return $res;
-}
+endif;
 
 function stylePW() {
     $lrrl = is_rtl() ? 'left' : 'right';
@@ -47,7 +55,7 @@ function stylePW() {
 add_action('admin_head', 'stylePW');
 
 function showpw() {
-    $shpw = get_pw();
+    $shpw = wpmatuto_generate_pw($inc_standard_special_chars = true);
     echo "<p id='shpw'>Generated&nbsp;Password:&nbsp;<strong>$shpw</strong></p>";
 }
 
