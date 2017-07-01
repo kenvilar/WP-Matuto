@@ -26,21 +26,20 @@ along with WP Matuto. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 
 /* This is the function where the password is generated */
 if(!function_exists('wpmatuto_generate_pw')):
-    function wpmatuto_generate_pw($special_char = true, $extra_special_chars = false ) {
-        $chars = 'dYZ012wx3enovyzpqKLMNrstuABCDfghijkIJlmEF67GHOPabcQRSTU89VWX45';
-
-        if($special_char):
-            $chars .= '&*()$%^!@#';
-        endif;
+    function wpmatuto_generate_pw($extra_special_chars = false) {
+        $chars = 'dYZ012wx3eno&*(vyzpqK)$%LMNrstuA';
+        $chars .= 'BCDfghijkIJlmEF67GHOPabcQRST^!@#U89VWX45';
 
         if($extra_special_chars):
             $chars .= '\'-_ []{}<>~`+=,.;:/?|';
         endif;
 
         $password_length = 12; // Length of the password
-        $pw = '';
-        for ( $i = 0; $i < $password_length; $i+=1 ) {
-            $pw .= substr($chars, wp_rand(0, strlen($chars) - 1), 1);
+        $pw = ''; // Initialize the password string
+        $largest_index_chars = strlen($chars) - 1;
+
+        for ($i = 0; $i < $password_length; $i += 1) {
+            $pw .= substr($chars, wp_rand(0, $largest_index_chars), 1);
         }
 
         return apply_filters('random_password', $pw);
@@ -55,7 +54,11 @@ function stylePW() {
 add_action('admin_head', 'stylePW');
 
 function showpw() {
-    $shpw = wpmatuto_generate_pw($inc_standard_special_chars = true);
+    /*
+     * Set the $inc_extra_special_chars to true if you want to include
+     * the extra special characters
+    */
+    $shpw = wpmatuto_generate_pw($inc_extra_special_chars = false);
     echo "<p id='shpw'>Generated&nbsp;Password:&nbsp;<strong>$shpw</strong></p>";
 }
 
