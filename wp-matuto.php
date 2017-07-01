@@ -75,9 +75,9 @@ function wpmatuto_register_taxonomy_tutorial() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array('slug' => 'tutorial'),
+        'rewrite'           => array('slug' => 'wpmatuto-tutorial'),
     );
-    register_taxonomy('tutorial', array('post'), $args);
+    register_taxonomy('wpmatuto-tutorial', array('post'), $args);
 }
 
 add_action('init', 'wpmatuto_register_taxonomy_tutorial');
