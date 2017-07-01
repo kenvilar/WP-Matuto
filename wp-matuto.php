@@ -55,7 +55,8 @@ add_action('admin_notices', 'showpw');
 
 // Custom Taxonomy for Tutorial
 function wpmatuto_register_taxonomy_tutorial() {
-    $labels = [
+    // either use [] or array() depending on your PHP version you're using
+    $labels = array(
         'name'              => _x('Tutorials', 'taxonomy general name'),
         'singular_name'     => _x('Tutorial', 'taxonomy singular name'),
         'search_items'      => __('Search Tutorials'),
@@ -67,16 +68,16 @@ function wpmatuto_register_taxonomy_tutorial() {
         'add_new_item'      => __('Add New Tutorial'),
         'new_item_name'     => __('New Tutorial Name'),
         'menu_name'         => __('Tutorial'),
-    ];
-    $args = [
+    );
+    $args = array(
         'hierarchical'      => true,
         'labels'            => $labels,
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => ['slug' => 'tutorial'],
-    ];
-    register_taxonomy('tutorial', ['post'], $args);
+        'rewrite'           => array('slug' => 'tutorial'),
+    );
+    register_taxonomy('tutorial', array('post'), $args);
 }
 
 add_action('init', 'wpmatuto_register_taxonomy_tutorial');
