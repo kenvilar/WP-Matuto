@@ -69,7 +69,10 @@ function wpmatuto_show_generated_password() {
     */
     $show_password = wpmatuto_generate_password($inc_extra_special_chars = false);
     // Do not use _e, just use __ when using printf or sprintf
-    printf( __('<p class=\'wpmatuto_show_password\'>Generated&nbsp;Password:&nbsp;<strong>%s</strong></p>', 'wpmatuto'), $show_password );
+    printf(
+        __('<p class=\'wpmatuto_show_password\'>Generated&nbsp;Password:&nbsp;<strong>%s</strong></p>', 'wpmatuto'),
+        $show_password
+    );
 }
 
 add_action('admin_notices', 'wpmatuto_show_generated_password');
@@ -106,20 +109,20 @@ add_action('init', 'wpmatuto_register_taxonomy_tutorial');
 // Sample field
 function wpmatuto_usermeta_form_field_birthday() {
     ?>
-    <h3>Your Birthday</h3>
+    <h3><?php echo esc_html__('Your Birthday', 'wpmatuto'); ?></h3>
     <table class="form-table">
         <tr>
-            <th><label for="birthday"></label></th>
+            <th><label for="birthday"><?php echo esc_html__('Birthday', 'wpmatuto'); ?></label></th>
             <td>
                 <input type="date"
                        class="regular-text ltr"
                        id="birthday"
                        name="birthday"
                        value="<?= esc_attr(get_user_meta($user->ID, 'birthday', true)); ?>"
-                       title="Please use YYYY-MM-DD as the date format."
+                       title="<?php echo esc_html__('Please use YYYY-MM-DD as the date format.', 'wpmatuto'); ?>"
                        pattern="(19[0-9][0-9]|20[0-9][0-9])-(1[0-2]|0[1-9])-(3[01]|[21][0-9]|0[1-9])"
                        required>
-                <p class="description">Please enter your birthday date.</p>
+                <p class="description"><?php echo esc_html__('Please enter your birthday date.', 'wpmatuto'); ?></p>
             </td>
         </tr>
     </table>
