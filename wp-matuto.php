@@ -46,7 +46,11 @@ endif;
 
 function stylePW() {
     $lrrl = is_rtl() ? 'left' : 'right';
-    echo "<style>#shpw{float:$lrrl;padding-$lrrl:15px;padding-top:5px;margin:0;font-size:11px;}</style>";
+    // Do not use _e, just use __ when using printf or sprintf
+    printf(
+        __('<style>#shpw{float:%1$s;padding-%1$s:15px;padding-top:5px;margin:0;font-size:11px;}</style>', 'wpmatuto'),
+        $lrrl
+    );
 }
 
 add_action('admin_head', 'stylePW');
@@ -57,7 +61,7 @@ function showpw() {
      * the extra special characters
     */
     $shpw = wpmatuto_generate_pw($inc_extra_special_chars = false);
-    echo "<p id='shpw'>Generated&nbsp;Password:&nbsp;<strong>$shpw</strong></p>";
+    printf( __('<p id=\'shpw\'>Generated&nbsp;Password:&nbsp;<strong>%s</strong></p>', 'wpmatuto'), $shpw );
 }
 
 add_action('admin_notices', 'showpw');
