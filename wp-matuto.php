@@ -81,17 +81,17 @@ add_action('admin_notices', 'wpmatuto_show_generated_password');
 function wpmatuto_register_taxonomy_tutorial() {
     // either use [] or array() depending on your PHP version you're using
     $labels = array(
-        'name'              => _x('Tutorials', 'taxonomy general name'),
-        'singular_name'     => _x('Tutorial', 'taxonomy singular name'),
-        'search_items'      => __('Search Tutorials'),
-        'all_items'         => __('All Tutorials'),
-        'parent_item'       => __('Parent Tutorial'),
-        'parent_item_colon' => __('Parent Tutorial:'),
-        'edit_item'         => __('Edit Tutorial'),
-        'update_item'       => __('Update Tutorial'),
-        'add_new_item'      => __('Add New Tutorial'),
-        'new_item_name'     => __('New Tutorial Name'),
-        'menu_name'         => __('Tutorial'),
+        'name'              => _x('Tutorials', 'taxonomy general name', 'wpmatuto'),
+        'singular_name'     => _x('Tutorial', 'taxonomy singular name', 'wpmatuto'),
+        'search_items'      => __('Search Tutorials', 'wpmatuto'),
+        'all_items'         => __('All Tutorials', 'wpmatuto'),
+        'parent_item'       => __('Parent Tutorial', 'wpmatuto'),
+        'parent_item_colon' => __('Parent Tutorial:', 'wpmatuto'),
+        'edit_item'         => __('Edit Tutorial', 'wpmatuto'),
+        'update_item'       => __('Update Tutorial', 'wpmatuto'),
+        'add_new_item'      => __('Add New Tutorial', 'wpmatuto'),
+        'new_item_name'     => __('New Tutorial Name', 'wpmatuto'),
+        'menu_name'         => __('Tutorial', 'wpmatuto'),
     );
     $args = array(
         'hierarchical'      => true,
@@ -148,7 +148,7 @@ add_action('edit_user_profile_update', 'wpmatuto_usermeta_form_field_birthday_up
 function wpmatuto_custom_cron_interval() {
     $schedules['one_day'] = array(
         'interval' => 86400,
-        'display' => esc_html__('Daily'),
+        'display' => esc_html__('Daily', 'wpmatuto'),
     );
 }
 
