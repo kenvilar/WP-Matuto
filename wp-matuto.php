@@ -130,5 +130,11 @@ add_action('personal_options_update', 'wpmatuto_usermeta_form_field_birthday_upd
 
 add_action('edit_user_profile_update', 'wpmatuto_usermeta_form_field_birthday_update');
 
-function myap() {
+function wpmatuto_custom_cron_interval() {
+    $schedules['one_day'] = array(
+        'interval' => 86400,
+        'display' => esc_html__('Daily')
+    );
 }
+
+add_filter('cron_schedules', 'wpmatuto_custom_cron_interval');
