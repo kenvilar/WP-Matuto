@@ -25,46 +25,54 @@ along with WP Matuto. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 
 /* This is the function where the password is generated */
-if(!function_exists('wpmatuto_generate_pw')):
-    function wpmatuto_generate_pw($extra_special_chars = false) {
-        $chars = 'dYZ012wx3eno&*(vyzpqK)$%LMNrstuA';
-        $chars .= 'BCDfghijkIJlmEF67GHOPabcQRST^!@#U89VWX45';
+if(!function_exists('wpmatuto_generate_password')):
+    function wpmatuto_generate_password($extra_special_chars = false) {
+        $chars = 'abcdefghijklmnopqrstuvwxyz';
+        $chars .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $chars .= '0123456789';
+        $chars .= '!@#$%^&*()';
 
         if($extra_special_chars):
-            $chars .= '\'-_ []{}<>~`+=,.;:/?|';
+            $chars .= '-_ []{}<>~`+=,.;:/?|';
         endif;
 
-        $pw = ''; // Initialize the password string
+        $wpmatuto_password = ''; // Initialize the password string
 
         for ($i = 0; $i < 12; $i += 1) {    // 12 is the length of the password
-            $pw .= substr($chars, wp_rand(0, strlen($chars) - 1), 1);
+            $wpmatuto_password .= substr($chars, wp_rand(0, strlen($chars) - 1), 1);
         }
 
-        return apply_filters('random_password', $pw);
+        return apply_filters('random_password', $wpmatuto_password);
     }
 endif;
 
-function stylePW() {
-    $lrrl = is_rtl() ? 'left' : 'right';
-    // Do not use _e, just use __ when using printf or sprintf
-    printf(
-        __('<style>#shpw{float:%1$s;padding-%1$s:15px;padding-top:5px;margin:0;font-size:11px;}</style>', 'wpmatuto'),
-        $lrrl
-    );
+function wpmatuto_style_password() {
+    $wpmatuto_is_rtl = is_rtl() ? 'left' : 'right';
+    echo "
+    <style>
+    .wpmatuto_show_password {
+        float: $wpmatuto_is_rtl;
+        padding-$wpmatuto_is_rtl: 15px;
+        padding-top: 5px;
+        margin: 0;
+        font-size: 11px; }
+    </style>
+    ";
 }
 
-add_action('admin_head', 'stylePW');
+add_action('admin_head', 'wpmatuto_style_password');
 
-function showpw() {
+function wpmatuto_show_generated_password() {
     /*
      * Set the $inc_extra_special_chars to true if you want to include
      * the extra special characters
     */
-    $shpw = wpmatuto_generate_pw($inc_extra_special_chars = false);
-    printf( __('<p id=\'shpw\'>Generated&nbsp;Password:&nbsp;<strong>%s</strong></p>', 'wpmatuto'), $shpw );
+    $show_password = wpmatuto_generate_password($inc_extra_special_chars = false);
+    // Do not use _e, just use __ when using printf or sprintf
+    printf( __('<p class=\'wpmatuto_show_password\'>Generated&nbsp;Password:&nbsp;<strong>%s</strong></p>', 'wpmatuto'), $show_password );
 }
 
-add_action('admin_notices', 'showpw');
+add_action('admin_notices', 'wpmatuto_show_generated_password');
 
 // Custom Taxonomy for Tutorial
 function wpmatuto_register_taxonomy_tutorial() {
