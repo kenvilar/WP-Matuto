@@ -47,7 +47,7 @@ if ( ! function_exists( 'wpmatuto_generate_password' ) ):
 endif;
 
 function wpmatuto_style_password() {
-    $wpmatuto_is_rtl = is_rtl() ? 'left' : 'right';
+    $wpmatuto_is_rtl = function_exists( 'is_rtl' ) && is_rtl() ? 'left' : 'right';
     echo "
     <style>
     .wpmatuto-show-password {
