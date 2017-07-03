@@ -50,12 +50,13 @@ function wpmatuto_style_password() {
     $wpmatuto_is_rtl = is_rtl() ? 'left' : 'right';
     echo "
     <style>
-    .wpmatuto_show_password {
+    .wpmatuto-show-password {
         float: $wpmatuto_is_rtl;
-        padding-$wpmatuto_is_rtl: 15px;
-        padding-top: 5px;
+        font-size: 11px;
         margin: 0;
-        font-size: 11px; }
+        padding-top: 5px;
+        padding-$wpmatuto_is_rtl: 15px;
+    }
     </style>
     ";
 }
@@ -70,7 +71,7 @@ function wpmatuto_show_generated_password() {
     $show_password = wpmatuto_generate_password($inc_extra_special_chars = false);
     // Do not use _e, just use __ when using printf or sprintf
     printf(
-        __('<p class=\'wpmatuto_show_password\'>Generated&nbsp;Password:&nbsp;<strong>%s</strong></p>', 'wpmatuto'),
+        __('<p class=\'wpmatuto-show-password\'>Generated&nbsp;Password:&nbsp;<strong>%s</strong></p>', 'wpmatuto'),
         $show_password
     );
 }
