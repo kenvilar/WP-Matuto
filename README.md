@@ -1,5 +1,5 @@
 # === WP Generate Password ===
-Contributors: kenvilar
+Contributors: Ken Vilar
 
 Donate link: 
 
@@ -28,17 +28,3 @@ Simple:
 ##== Screenshots ==
 
 ##== Changelog ==
-
-= 0.1a =
- Posibility of asociate to a category
-
-= 0.1b =
- Reestructure the files
-
-= 0.1c =
- Increase the usability
-
-= 0.1d = 
- List of articles order by karma (sum of comments karma)
- Posibility of clear karma user
- Posibility of clear karma comments

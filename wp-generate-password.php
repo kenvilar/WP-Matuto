@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: WP Generate Password
-Plugin URI:  http://#
+Plugin URI:  http://kenvilar.com/wp-generate-password/
 Description: A simple plugin that will generate password and displays at the top of every admin pages.
-Version:     0.0.1
+Version:     1.0.0
 Author:      Ken Vilar
-Author URI:  http://#
+Author URI:  http://kenvilar.com/
 Text Domain: wp-generate-password
 Domain Path: /languages
 License:     GPL2
